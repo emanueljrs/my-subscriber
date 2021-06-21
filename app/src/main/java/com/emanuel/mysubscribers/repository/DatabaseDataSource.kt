@@ -4,7 +4,10 @@ import androidx.lifecycle.LiveData
 import com.emanuel.mysubscribers.data.db.dao.SubscriberDAO
 import com.emanuel.mysubscribers.data.db.entity.SubscriberEntity
 
-class DatabaseDataSource(val subscriberDAO: SubscriberDAO) : SubscriberRepository {
+/*Classe de fonte de dados, que recebe um DAO para chamar as operações e salvar no banco.
+Herda de classe repository e implementas os métedos chamando os métodos da classe DAO.
+*/
+class DatabaseDataSource(private val subscriberDAO: SubscriberDAO) : SubscriberRepository {
 
     override suspend fun insertSubscriber(name: String, email: String): Long {
         val subscriber = SubscriberEntity(

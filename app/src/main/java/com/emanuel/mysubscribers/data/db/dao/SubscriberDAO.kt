@@ -7,7 +7,7 @@ import androidx.room.Query
 import androidx.room.Update
 import com.emanuel.mysubscribers.data.db.entity.SubscriberEntity
 
-@Dao
+@Dao //Classe com as assinaturas das operações no banco
 interface SubscriberDAO {
 
     @Insert
@@ -16,12 +16,12 @@ interface SubscriberDAO {
     @Update
     suspend fun update(subscriber: SubscriberEntity)
 
-    @Query("DELETE FROM subscriber WHERE id = :id")
+    @Query("DELETE FROM subscriber WHERE id == :id")
     suspend fun delete(id: Long)
 
     @Query("DELETE FROM subscriber")
     suspend fun deleteAll()
 
     @Query("SELECT * FROM subscriber")
-    suspend fun getAll(): LiveData<List<SubscriberEntity>>
+    fun getAll(): LiveData<List<SubscriberEntity>>
 }

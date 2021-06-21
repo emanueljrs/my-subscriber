@@ -6,4 +6,6 @@
     <string name="subscriber_hint_email">E-mail</string>
     <string name="subscriber_button">Add</string>
     <string name="subscriber_title">Subscriber</string>
+    <string name="subscriber_inserted_successfully">Subscriber was inserted with successfully.</string>
+    <string name="subscriber_error_to_insert">"Error inserted subscriber "</string>
 </resources>
