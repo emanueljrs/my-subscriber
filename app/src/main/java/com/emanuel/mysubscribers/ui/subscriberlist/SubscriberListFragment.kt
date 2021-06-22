@@ -8,6 +8,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import com.emanuel.mysubscribers.R
 import com.emanuel.mysubscribers.data.db.AppDatabase
 import com.emanuel.mysubscribers.data.db.dao.SubscriberDAO
 import com.emanuel.mysubscribers.databinding.SubscriberListFragmentBinding
@@ -42,6 +44,7 @@ class SubscriberListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         observeViewModelEvents()
+        configureViewListeners()
     }
 
     private fun observeViewModelEvents() {
@@ -52,6 +55,13 @@ class SubscriberListFragment : Fragment() {
                 setHasFixedSize(true)
                 adapter = mAdapter
             }
+        }
+    }
+
+
+    private fun configureViewListeners() {
+        binding.fabSubscriberAdd.setOnClickListener {
+            findNavController().navigate(R.id.subscriberFragment)
         }
     }
 }
