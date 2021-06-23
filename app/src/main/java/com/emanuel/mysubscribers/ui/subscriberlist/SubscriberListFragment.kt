@@ -13,6 +13,7 @@ import com.emanuel.mysubscribers.R
 import com.emanuel.mysubscribers.data.db.AppDatabase
 import com.emanuel.mysubscribers.data.db.dao.SubscriberDAO
 import com.emanuel.mysubscribers.databinding.SubscriberListFragmentBinding
+import com.emanuel.mysubscribers.extension.navigateWithAnimations
 import com.emanuel.mysubscribers.repository.DatabaseDataSource
 import com.emanuel.mysubscribers.repository.SubscriberRepository
 
@@ -61,7 +62,7 @@ class SubscriberListFragment : Fragment() {
 
     private fun configureViewListeners() {
         binding.fabSubscriberAdd.setOnClickListener {
-            findNavController().navigate(R.id.subscriberFragment)
+            findNavController().navigateWithAnimations(R.id.subscriberFragment)
         }
     }
 }
