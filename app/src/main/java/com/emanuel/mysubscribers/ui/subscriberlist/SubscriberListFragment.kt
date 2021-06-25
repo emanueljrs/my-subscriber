@@ -61,6 +61,7 @@ class SubscriberListFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
+        //Faz uma nova consulta quando a tela volta a ser visível
         viewModel.getAllSubscribers()
     }
 
