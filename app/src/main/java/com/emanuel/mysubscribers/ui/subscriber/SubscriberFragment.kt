@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.emanuel.mysubscribers.data.db.AppDatabase
 import com.emanuel.mysubscribers.data.db.dao.SubscriberDAO
 import com.emanuel.mysubscribers.databinding.SubscriberFragmentBinding
@@ -63,6 +64,9 @@ class SubscriberFragment : Fragment() {
                     clearFields()
                     hideKeyboard()
                     requireView().requestFocus()
+
+                    //Retorna para a tela anterior da pilha
+                    findNavController().popBackStack()
                 }
             }
         }
