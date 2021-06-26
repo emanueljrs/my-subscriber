@@ -11,5 +11,7 @@
 
 <!--  SubscriberListFragment  -->
     <string name="subscriber_list_title">Subscriber List</string>
+    <string name="button_update">Update</string>
+    <string name="subscriber_updated_successfully">Subscriber was successfully updated</string>
 
 </resources>

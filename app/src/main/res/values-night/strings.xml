@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="button_update">Update</string>
+    <string name="subscriber_updated_successfully">Subscriber was successfully updated</string>
+</resources>

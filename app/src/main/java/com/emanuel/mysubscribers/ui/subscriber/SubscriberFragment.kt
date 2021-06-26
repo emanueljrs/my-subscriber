@@ -1,7 +1,6 @@
 package com.emanuel.mysubscribers.ui.subscriber
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +10,8 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
+import com.emanuel.mysubscribers.R
 import com.emanuel.mysubscribers.data.db.AppDatabase
 import com.emanuel.mysubscribers.data.db.dao.SubscriberDAO
 import com.emanuel.mysubscribers.databinding.SubscriberFragmentBinding
@@ -23,6 +24,7 @@ class SubscriberFragment : Fragment() {
 
     private var _binding: SubscriberFragmentBinding? = null
     private val binding get() = _binding!!
+    private val args: SubscriberFragmentArgs by navArgs()
 
     //Cria uma instância do viewModel com o padrão factory com injeção de dependência
     private val viewModel: SubscriberViewModel by viewModels {
@@ -53,8 +55,17 @@ class SubscriberFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        fillFields()
         observeEvents()
         setListeners()
+    }
+
+    private fun fillFields() {
+        args.subscriber?.let { subscriber ->
+            binding.buttonAdd.setText(R.string.button_update)
+            binding.inputName.setText(subscriber.name)
+            binding.inputEmail.setText(subscriber.email)
+        }
     }
 
     private fun observeEvents() {
@@ -66,6 +77,11 @@ class SubscriberFragment : Fragment() {
                     requireView().requestFocus()
 
                     //Retorna para a tela anterior da pilha
+                    findNavController().popBackStack()
+                }
+                is SubscriberViewModel.SubscriberState.Updated -> {
+                    clearFields()
+                    hideKeyboard()
                     findNavController().popBackStack()
                 }
             }
@@ -95,9 +111,7 @@ class SubscriberFragment : Fragment() {
             val name = binding.inputName.text.toString()
             val email = binding.inputEmail.text.toString()
 
-            Log.e("Campo", "$name: $email")
-
-            viewModel.addSubscriber(name, email)
+            viewModel.addOrUpdate(name, email, args.subscriber?.id ?: 0)
         }
     }
 
