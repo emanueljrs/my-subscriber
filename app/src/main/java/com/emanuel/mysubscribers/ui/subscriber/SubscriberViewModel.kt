@@ -9,7 +9,7 @@ import com.emanuel.mysubscribers.R
 import com.emanuel.mysubscribers.repository.SubscriberRepository
 import kotlinx.coroutines.launch
 
-class SubscriberViewModel(val repository: SubscriberRepository) : ViewModel() {
+class SubscriberViewModel(private val repository: SubscriberRepository) : ViewModel() {
 
     //Dois LiveDatas com o padrão backproperty para garantir a segurança dos MutableLiveData
     private val _subscriberStateEventData = MutableLiveData<SubscriberState>()
@@ -37,7 +37,7 @@ class SubscriberViewModel(val repository: SubscriberRepository) : ViewModel() {
             _messageEventData.value = R.string.subscriber_updated_successfully
 
         } catch (ex: Exception) {
-            _messageEventData.value = R.string.subscriber_error_to_insert
+            _messageEventData.value = R.string.subscriber_error_to_update
             Log.e(TAG, ex.toString())
         }
     }
@@ -56,10 +56,24 @@ class SubscriberViewModel(val repository: SubscriberRepository) : ViewModel() {
         }
     }
 
+    fun deleteSubscriber(id: Long) = viewModelScope.launch {
+        try {
+            if (id > 0) {
+                repository.deleteSubscriber(id)
+                _subscriberStateEventData.value = SubscriberState.Deleted
+                _messageEventData.value = R.string.subscriber_deleted_successfully
+            }
+        } catch (ex: Exception) {
+            _messageEventData.value = R.string.subscriber_error_to_delete
+            Log.e(TAG, ex.toString())
+        }
+    }
+
     //Classe para trabalhar com os estados para o LiveData
     sealed class SubscriberState {
         object Inserted : SubscriberState()
         object Updated : SubscriberState()
+        object Deleted : SubscriberState()
     }
 
     companion object {

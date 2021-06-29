@@ -2,4 +2,5 @@
 <resources>
     <string name="button_update">Update</string>
     <string name="subscriber_updated_successfully">Subscriber was successfully updated</string>
+    <string name="subscriber_delete">Delete</string>
 </resources>
