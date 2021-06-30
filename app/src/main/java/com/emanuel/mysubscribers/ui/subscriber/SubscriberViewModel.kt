@@ -20,7 +20,7 @@ class SubscriberViewModel(private val repository: SubscriberRepository) : ViewMo
     val messageEventData: LiveData<Int>
         get() = _messageEventData
 
-    fun addOrUpdate(name: String, email: String, id: Long = 0) {
+    fun addOrUpdate(name: String, email: String, id: Long) {
         if (id > 0) {
             updateSubscriber(id, name, email)
         } else {
