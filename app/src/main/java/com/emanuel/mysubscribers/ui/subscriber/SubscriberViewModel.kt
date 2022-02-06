@@ -26,7 +26,6 @@ class SubscriberViewModel(private val repository: SubscriberRepository) : ViewMo
         } else {
             insertSubscriber(name, email)
         }
-
     }
 
     private fun updateSubscriber(id: Long, name: String, email: String) = viewModelScope.launch {
